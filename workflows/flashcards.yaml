@@ -1,0 +1,24 @@
+name: pdf-to-flashcards
+version: 1
+description: Extract text on client; chunk and generate flashcards on Worker AI.
+
+triggers:
+  - http: POST /workflow/generate
+
+steps:
+  - id: chunk
+    run: worker:pdf-to-flashcards-tutor
+    function: chunk
+    input:
+      text: $.request.body.text
+      maxChars: 2000
+      overlap: 200
+
+  - id: generate
+    run: worker:pdf-to-flashcards-tutor
+    function: generateFromChunks
+    input:
+      chunks: $.steps.chunk.output.chunks
+
+returns:
+  flashcards: $.steps.generate.output.flashcards

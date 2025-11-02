@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+**/dist/
+coverage/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+!.env.example
+**/.dev.vars
+
+# Editor & OS artifacts
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Caches
+.cache/
+.eslintcache
+node_modules/.cache/
+pages/.vite/
+**/.vite/
+.parcel-cache/
+
+# Common temp and backup files
+*~
+*.swp
+*.swo
+*.orig
+*.rej
+*.bak
+*.tmp
+**/tmp/
+**/temp/
+
+# Test coverage artifacts
+.nyc_output/
+
+# Cloudflare Wrangler local state
+.wrangler/
+**/.wrangler/**
+worker/.wrangler/
+infra/.wrangler/
+
+# Misc build artifacts
+storybook-static/

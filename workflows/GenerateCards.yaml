@@ -1,0 +1,35 @@
+name: GenerateCards
+version: 1
+description: Batch chunks and generate flashcards via Workers AI with deduplication.
+
+# This workflow is designed to be started programmatically via env.WORKFLOWS.start('GenerateCards', input)
+# Input Shape: { chunks: Chunk[], maxCards?: number, llmModel: string }
+
+steps:
+  - id: prepareBatches
+    run: worker:pdf-to-flashcards-tutor
+    function: prepareBatches
+    input:
+      chunks: $.input.chunks
+      targetTokens: 3000
+      maxCards: $.input.maxCards
+
+  - id: llmBatch
+    run: worker:pdf-to-flashcards-tutor
+    function: generateCardsFromBatches
+    input:
+      batches: $.steps.prepareBatches.output.batches
+      llmModel: $.input.llmModel
+      maxCardsPerBatch: $.input.maxCards
+
+  - id: dedupeAndTrim
+    run: worker:pdf-to-flashcards-tutor
+    function: dedupeAndTrim
+    input:
+      candidates: $.steps.llmBatch.output.candidates
+      maxCards: $.input.maxCards
+      prevStats: $.steps.prepareBatches.output.stats
+
+returns:
+  cards: $.steps.dedupeAndTrim.output.cards
+  stats: $.steps.dedupeAndTrim.output.stats

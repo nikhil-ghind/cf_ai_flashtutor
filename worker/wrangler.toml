@@ -1,0 +1,23 @@
+name = "pdf-to-flashcards-tutor"
+main = "src/index.ts"
+compatibility_date = "2024-10-01"
+
+[observability]
+logs = { enabled = true }
+
+[ai]
+binding = "AI"
+
+[[workflows]]
+binding = "WORKFLOWS"
+name = "workflows"
+class_name = "Workflows"
+
+[dev]
+port = 8787
+
+[vars]
+# Set a valid default LLM model slug available to your account
+LLM_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+# Set a valid STT model slug available to your account
+STT_MODEL = "@cf/openai/whisper"

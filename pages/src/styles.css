@@ -1,0 +1,16 @@
+:root { --bg: #ffffff; --panel: #ffffff; --text: #000000; --muted: #000000; --accent: #4f46e5; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, sans-serif; background: var(--bg); color: var(--text); }
+.app { max-width: 900px; margin: 0 auto; padding: 24px; }
+header { margin-bottom: 16px; }
+.button { background: var(--accent); color: white; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+.button:disabled { opacity: 0.6; cursor: not-allowed; }
+.uploader { display: flex; gap: 12px; align-items: center; }
+.status { color: var(--muted); }
+.info { margin: 12px 0; color: var(--muted); }
+.error { color: #000000; margin-top: 10px; }
+.muted { color: var(--muted); }
+.cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.card { background: var(--panel); padding: 12px; border-radius: 12px; }
+.qa { margin-bottom: 8px; }
+.actions { display: flex; gap: 8px; }
